@@ -26,17 +26,7 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [
-					{
-						"name": "schema"
-					},
-					{
-						"name": "cdc"
-					},
-					{
-						"name": "table"
-					}
-				],
+				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
