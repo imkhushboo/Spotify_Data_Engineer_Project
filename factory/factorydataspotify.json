@@ -1,0 +1,15 @@
+{
+	"name": "factorydataspotify",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "540b085a-5ca4-45f9-bb26-a9353aec2439",
+		"tenantId": "820cf474-bcbc-431c-8c7a-d7e5f3ec2ded"
+	}
+}
