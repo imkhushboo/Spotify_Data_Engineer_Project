@@ -5,7 +5,20 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "current",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -13,10 +26,24 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "schema"
+					},
+					{
+						"name": "cdc"
+					},
+					{
+						"name": "table"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select * from @{pipeline().parameters.schema}.@p{ipeline().parameters.table} where @{pipeline().parameters.cdc} > '@{activity('Lookup1').output.value[0].cdc}'",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -48,7 +75,15 @@
 				"outputs": [
 					{
 						"referenceName": "Parquet1",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"file": {
+								"value": "@concat(pipeline().parameters.table,' ',variables('current'))",
+								"type": "Expression"
+							},
+							"container": "bronze",
+							"folder": "Users"
+						}
 					}
 				]
 			},
@@ -87,8 +122,41 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "current",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "current",
+					"value": {
+						"value": "@utcNow()",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"parameters": {
+			"schema": {
+				"type": "string"
+			},
+			"table": {
+				"type": "string"
+			},
+			"cdc": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"current": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
