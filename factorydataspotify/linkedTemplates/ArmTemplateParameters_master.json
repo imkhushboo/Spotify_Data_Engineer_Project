@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "factorydataspotify"
+		},
+		"AzureDataLakels_accountKey": {
+			"value": ""
+		},
+		"Azure_sql_ls_password": {
+			"value": ""
+		},
+		"AzureDataLakels_properties_typeProperties_url": {
+			"value": "https://azurespotifydata.dfs.core.windows.net/"
+		},
+		"Azure_sql_ls_properties_typeProperties_server": {
+			"value": "spotifyazureserverkhush.database.windows.net"
+		},
+		"Azure_sql_ls_properties_typeProperties_database": {
+			"value": "spotifydb"
+		},
+		"Azure_sql_ls_properties_typeProperties_userName": {
+			"value": "khush_admin"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
